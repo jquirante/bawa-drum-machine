@@ -55,14 +55,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyCodes: [49, 50, 51, 52, 81, 87, 69, 82, 65, 83, 68, 70, 90, 88, 67, 86],
-      keySymbols: [1, 2, 3, 4, 'q', 'w', 'e', 'r', 'a', 's', 'd', 'f', 'z', 'x', 'c', 'v'],
-      audioFiles: ["samples/clap.WAV", "samples/closed-hat.WAV", "samples/cowbell.WAV", "samples/cymbal.WAV", "samples/kick.WAV", "samples/low-tom.WAV", "samples/mid-tom.WAV", "samples/high-tom.WAV", "samples/open-hat.WAV", "samples/snare.WAV", "samples/bass-stab.WAV", "samples/blip.WAV", "samples/echo.WAV", "samples/nomsayn.WAV", "samples/pwa-pwa.WAV", "samples/haht-of-venice.WAV"],
+      keyCodes: [49, 50, 51, 52, 81, 87, 69, 82, 65, 83, 68, 70, 90, 88, 67, 86, 76],
+      keySymbols: [1, 2, 3, 4, 'q', 'w', 'e', 'r', 'a', 's', 'd', 'f', 'z', 'x', 'c', 'v','l'],
+      audioFiles: ["samples/clap.WAV", "samples/closed-hat.WAV", "samples/cowbell.WAV", "samples/cymbal.WAV", "samples/kick.WAV", "samples/low-tom.WAV", "samples/mid-tom.WAV", "samples/high-tom.WAV", "samples/open-hat.WAV", "samples/snare.WAV", "samples/bass-stab.WAV", "samples/blip.WAV", "samples/echo.WAV", "samples/nomsayn.WAV", "samples/pwa-pwa.WAV", "samples/haht-of-venice.WAV","samples/808-loop.WAV"],
     }
   }
 
   handleKeydown = (e) => {
-    let code = e.keyCode;  
+    debugger;
+    let code = e.keyCode || e.target.children[1].id; 
+    // console.log(e.target.children); 
+    console.log('keycode', e.keyCode);
     let audio = document.getElementById(code);
     if (!audio) return;
     audio.currentTime = 0;
@@ -75,6 +78,9 @@ class App extends Component {
     // ******************
     const buttons = [];
     // INSERT CODE HERE
+    for ( var button = 0; button < 17; button ++) {
+      buttons.push(<Button id={button} handleKeydown={this.handleKeydown} keyCode={this.state.keyCodes[button]} keySymbol={this.state.keySymbols[button]} audioFile={this.state.audioFiles[button]}/>);
+    }
 
     // ****************** 
 
